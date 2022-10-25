@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header"></head>
+
+<body>
+    <nav th:replace="layouts :: navbar"></nav>
+    <br>
+
+    <div class="container">
+        <form th:action="@{/employees/save}" method="post" th:object="${employee}">
+            <h2>Employee Form</h2>
+<!--            This will be used to bind to the employee that was clicked on (USED FOR UPDATES) -->
+            <input type="hidden" th:field="${employee.employeeId}">
+
+<!--            Use for when updating employee, project wouldn't be deleted-->
+            <input type="hidden" th:field="${employee.projects}">
+
+            <div class="form-group row">
+                <label for="firstname" style="margin-right: 20px">First Name</label>
+                <input type="text" id="firstname" placeholder="First Name" th:field="${employee.firstName}">
+                <span style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="${employee.firstName}"></span>
+            </div>
+
+            <div class="form-group row">
+                <label for="lastname" style="margin-right: 20px">Last Name</label>
+                <input type="text" id="lastname" placeholder="Last Name" th:field="${employee.lastName}">
+                <span style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="${employee.lastName}">Full name error</span>
+            </div>
+
+            <div class="form-group row">
+                <label for="email" style="margin-right: 55px">Email</label>
+                <input type="text" id="email" placeholder="Email Name" th:field="${employee.email}">
+                <span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="${employee.email}">Full name error</span>
+            </div>
+
+            <button class="btn btn-info col-2" type="submit">Save employee</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
